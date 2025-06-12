@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Animal>
  */
-class AnimalFactory extends Factory
+class HabitatFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,12 +17,7 @@ class AnimalFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => fake()->name(),
-            'especie' => fake()->word(),
-            'raza' => fake()->word(),
-            'sexo' => fake()->randomElement(['Macho', 'Hembra']),
-            'color' => fake()->colorName(),
-            'habitat_id' => fake()->numberBetween(1, 3)
+            'descripcion' => fake()->sentence()
         ];
     }
 }

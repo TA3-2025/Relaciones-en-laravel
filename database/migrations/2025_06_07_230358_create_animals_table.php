@@ -18,6 +18,11 @@ return new class extends Migration
             $table->string('raza');
             $table->string('sexo');
             $table->string('color');
+            $table->unsignedBigInteger('habitat_id');
+            $table->foreign('habitat_id')
+                ->references('id')
+                ->on('habitats');
+
             $table->timestamps();
             $table->softDeletes();
         });

@@ -14,6 +14,23 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
+        \App\Models\Habitat::factory(1)->create([
+            'id' => 1,
+            'nombre' => 'Acuario',
+        ]);
+
+        \App\Models\Habitat::factory(1)->create([
+            'id' => 2,
+            'nombre' => 'Terrario',
+        ]);
+
+        \App\Models\Habitat::factory(1)->create([
+            'id' => 3,
+            'nombre' => 'Aerio',
+        ]);
+
+
+
         \App\Models\Animal::factory(30)->create();
 
         \App\Models\Animal::factory(1)->create([
