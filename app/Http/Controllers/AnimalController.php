@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Validator;
 class AnimalController extends Controller
 {
     public function ListarTodos(Request $request){
-        $animales = Animal::with("habitat")->get();
+        $animales = Animal::with("habitat")->
+                            with("come") ->
+                            get();
         return $animales;
     }
 

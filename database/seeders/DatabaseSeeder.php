@@ -30,9 +30,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-
         \App\Models\Animal::factory(30)->create();
-
         \App\Models\Animal::factory(1)->create([
             'id' => 1000,
             'nombre' => 'Luna',
@@ -41,7 +39,14 @@ class DatabaseSeeder extends Seeder
             'sexo' => 'Macho',
             'color' => 'Dorado'
         ]);
-
         \App\Models\Animal::factory(1)->create(['id' => 1001]);
+
+        \App\Models\Fruta::factory(10)->create();
+        for($i = 1; $i <= 10; $i++) {
+            \App\Models\Come::factory(1)->create([
+                'animal_id' => $i + 5,
+                'fruta_id' => $i
+            ]);
+        }
     }
 }
