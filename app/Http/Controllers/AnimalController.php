@@ -59,11 +59,11 @@ class AnimalController extends Controller
     }
 
     public function Modificar(Request $request, $id){
-
+        $animal = Animal::findOrFail($id);
+        
         if(($validacion = $this -> ValidarRequest($request->all()) ) != null)
             return response($validacion, 401);
 
-        $animal = Animal::findOrFail($id);
         $animal->nombre = $request->post('nombre');
         $animal->especie = $request->post('especie');
         $animal->raza = $request->post('raza');

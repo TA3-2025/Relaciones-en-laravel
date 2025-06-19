@@ -22,6 +22,7 @@ class AnimalTest extends TestCase
                 'nombre',
                 'especie',
                 'raza',
+                'habitat_id',
                 'sexo',
                 'color',
                 'created_at',
@@ -41,6 +42,7 @@ class AnimalTest extends TestCase
             'raza',
             'sexo',
             'color',
+            'habitat_id',
             'created_at',
             'updated_at'
         ]);
@@ -58,8 +60,9 @@ class AnimalTest extends TestCase
             'nombre' => 'Luna',
             'especie' => 'Perro',
             'raza' => 'Labrador',
-            'sexo' => 'Hembra',
-            'color' => 'Amarillo'
+            'sexo' => 'H',
+            'color' => 'Amarillo',
+            'habitat_id' => "1"
         ];
         $response = $this -> post('/api/animal', $data);
         $response -> assertStatus(201);
@@ -70,6 +73,7 @@ class AnimalTest extends TestCase
             'raza',
             'sexo',
             'color',
+            'habitat_id',
             'created_at',
             'updated_at'
         ]);
@@ -82,10 +86,11 @@ class AnimalTest extends TestCase
             'nombre' => Str::Random(10),
             'especie' => Str::Random(10),
             'raza' => Str::Random(10),
-            'sexo' => Str::Random(10),
-            'color' => Str::Random(10)
+            'sexo' => 'M',
+            'color' => Str::Random(10),
+            'habitat_id' => 3
         ];
-        $response = $this -> put('/api/animal/1000', $data);
+        $response = $this -> put('/api/animal/20', $data);
         $response -> assertStatus(200);
         $response -> assertJsonStructure([
             'id',
@@ -94,6 +99,7 @@ class AnimalTest extends TestCase
             'raza',
             'sexo',
             'color',
+            'habitat_id',
             'created_at',
             'updated_at',
             'deleted_at'
@@ -109,7 +115,7 @@ class AnimalTest extends TestCase
 
     public function test_EliminarExistente(): void
     {
-        $response = $this -> delete('/api/animal/1001');
+        $response = $this -> delete('/api/animal/21');
         $response -> assertStatus(200);
 
         $response -> assertJsonFragment([

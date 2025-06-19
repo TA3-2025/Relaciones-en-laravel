@@ -15,31 +15,27 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         \App\Models\Habitat::factory(1)->create([
-            'id' => 1,
             'nombre' => 'Acuario',
         ]);
 
         \App\Models\Habitat::factory(1)->create([
-            'id' => 2,
             'nombre' => 'Terrario',
         ]);
 
         \App\Models\Habitat::factory(1)->create([
-            'id' => 3,
             'nombre' => 'Aerio',
         ]);
 
 
         \App\Models\Animal::factory(30)->create();
         \App\Models\Animal::factory(1)->create([
-            'id' => 1000,
             'nombre' => 'Luna',
             'especie' => 'Pez',
             'raza' => 'Betta',
             'sexo' => 'Macho',
             'color' => 'Dorado'
         ]);
-        \App\Models\Animal::factory(1)->create(['id' => 1001]);
+
 
         \App\Models\Fruta::factory(10)->create();
         for($i = 1; $i <= 10; $i++) {

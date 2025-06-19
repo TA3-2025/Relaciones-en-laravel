@@ -1,0 +1,21 @@
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    restart: unless-stopped
+    ports:
+      - "1433:1433"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=P4ssw0rd!
+      - TZ=America/Montevideo
+  api:
+    image: sqlserver
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "8000:80"
