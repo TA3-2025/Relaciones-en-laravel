@@ -10,11 +10,32 @@ services:
         max-size: "10m"
         max-file: "3"
     environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=P4ssw0rd!
-      - TZ=America/Montevideo
+      ACCEPT_EULA: Y
+      SA_PASSWORD: P4ssw0rd!
+      TZ: America/Montevideo
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $$SA_PASSWORD -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      retries: 10
+      start_period: 10s
+      timeout: 3s
+
+  mssql.configurator:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    depends_on:
+      mssql:
+        condition: service_healthy
+    environment:
+      SA_PASSWORD: P4ssw0rd!
+      DB_NAME: animales
+    command: >
+      bash -c '
+      /opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P $$SA_PASSWORD -Q "CREATE DATABASE IF NOT EXISTS $${DB_NAME};"
+      '
   api:
     image: sqlserver
+    depends_on:
+      - mssql.configurator
     volumes:
       - ./:/var/www/html
     ports:
